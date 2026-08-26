@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local Python environments and secrets
+.venv/
+venv/
+.env
+.env.*
+
+# Generated search indexes
+data/index/*.sqlite3
+data/index/*.sqlite3-*
+
+# Temporary planning notes
+FUZZY_VECTOR_PLAN.txt
