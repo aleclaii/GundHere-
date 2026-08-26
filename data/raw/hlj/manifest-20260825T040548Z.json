@@ -1,0 +1,64 @@
+{
+  "started_at": "2026-08-25T04:05:48.875185+00:00",
+  "seed_url": "https://www.hlj.com/search/?GenreCode2=Gundam&MacroType2=High+Grade+Kits",
+  "user_agent": "GundHereBot/0.1 (noncommercial student Gunpla search engine project)",
+  "pages": [
+    {
+      "requested_url": "https://www.hlj.com/search/?GenreCode2=Gundam&MacroType2=High+Grade+Kits",
+      "final_url": "https://www.hlj.com/search/?GenreCode2=Gundam&MacroType2=High+Grade+Kits",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 200915,
+      "sha256": "ddf9941f1031325c7fac33b823233d05fa1d0696b9e89e3a70c4a4e9640236ff",
+      "file": "data/raw/hlj/seed-20260825T040548Z.html"
+    },
+    {
+      "requested_url": "https://www.hlj.com/1-144-scale-hg-00-gundam-banh592347-up",
+      "final_url": "https://www.hlj.com/1-144-scale-hg-00-gundam-banh592347-up",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 113388,
+      "sha256": "99086f88f332db745a402d0054aa5befd21d5e21d589b6fb94020eb8c9472659",
+      "file": "data/raw/hlj/1-144-scale-hg-00-gundam-banh592347-up-20260825T040548Z.html"
+    },
+    {
+      "requested_url": "https://www.hlj.com/1-144-scale-hg-full-armor-gundam-gundam-thunderbolt-ver-anime-ver-banh631374-up",
+      "final_url": "https://www.hlj.com/1-144-scale-hg-full-armor-gundam-gundam-thunderbolt-ver-anime-ver-banh631374-up",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 112075,
+      "sha256": "7e71ca3238c59dc30447a049b8ab3fd83c54778750ccba2f4e14ec26d48e0522",
+      "file": "data/raw/hlj/1-144-scale-hg-full-armor-gundam-gundam-thunderbolt-ver-anime-ver-banh631374-up-20260825T040548Z.html"
+    },
+    {
+      "requested_url": "https://www.hlj.com/1-144-scale-hg-gundam-age-fx-banh573889-up",
+      "final_url": "https://www.hlj.com/1-144-scale-hg-gundam-age-fx-banh573889-up",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 111776,
+      "sha256": "5e393f23581a3e06134c5fdabea9668ed7d2c58958409f7d15d67956e8ddc508",
+      "file": "data/raw/hlj/1-144-scale-hg-gundam-age-fx-banh573889-up-20260825T040548Z.html"
+    },
+    {
+      "requested_url": "https://www.hlj.com/1-144-scale-hg-gundam-ground-type-banh591692-up",
+      "final_url": "https://www.hlj.com/1-144-scale-hg-gundam-ground-type-banh591692-up",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 115056,
+      "sha256": "ee9313aad3f7404e8bf8027e07248263a52d190e06120e6dffc0e454deaefc42",
+      "file": "data/raw/hlj/1-144-scale-hg-gundam-ground-type-banh591692-up-20260825T040548Z.html"
+    },
+    {
+      "requested_url": "https://www.hlj.com/1-144-scale-hg-gundam-sandrock-custom-ew-banh725424",
+      "final_url": "https://www.hlj.com/1-144-scale-hg-gundam-sandrock-custom-ew-banh725424",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 115846,
+      "sha256": "489e51c78b8acb010d9c981ebf7960d37b17c80b9f2cda147e07e72ef9ca25f1",
+      "file": "data/raw/hlj/1-144-scale-hg-gundam-sandrock-custom-ew-banh725424-20260825T040548Z.html"
+    }
+  ],
+  "errors": [],
+  "delay_seconds": 5.0,
+  "finished_at": "2026-08-25T04:06:18.640733+00:00"
+}

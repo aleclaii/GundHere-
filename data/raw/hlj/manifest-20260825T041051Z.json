@@ -1,0 +1,64 @@
+{
+  "started_at": "2026-08-25T04:10:51.363283+00:00",
+  "seed_url": "https://www.hlj.com/search/?Word=gundam&GenreCode2=Gundam&Page=1&MacroType2=Gundam+Kits&Sort=rss+desc&MacroType2=High+Grade+Kits&MacroType2=Master+Grade+Kits&MacroType2=Perfect+Grade+Kits&MacroType2=Real+Grade+Kits",
+  "user_agent": "GundHereBot/0.1 (noncommercial student Gunpla search engine project)",
+  "pages": [
+    {
+      "requested_url": "https://www.hlj.com/search/?Word=gundam&GenreCode2=Gundam&Page=1&MacroType2=Gundam+Kits&Sort=rss+desc&MacroType2=High+Grade+Kits&MacroType2=Master+Grade+Kits&MacroType2=Perfect+Grade+Kits&MacroType2=Real+Grade+Kits",
+      "final_url": "https://www.hlj.com/search/?Word=gundam&GenreCode2=Gundam&Page=1&MacroType2=Gundam+Kits&Sort=rss+desc&MacroType2=High+Grade+Kits&MacroType2=Master+Grade+Kits&MacroType2=Perfect+Grade+Kits&MacroType2=Real+Grade+Kits",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 209799,
+      "sha256": "0e3ce8f9e20d6461457090ff0ef7fb16f795f47a9f5165555057bcd6667d7e15",
+      "file": "data/raw/hlj/seed-20260825T041051Z.html"
+    },
+    {
+      "requested_url": "https://www.hlj.com/1-100-scale-mg-full-armor-gundam-ver-ka-gundam-thunderbolt-ver-banh630490-up",
+      "final_url": "https://www.hlj.com/1-100-scale-mg-full-armor-gundam-ver-ka-gundam-thunderbolt-ver-banh630490-up",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 113578,
+      "sha256": "b10c3e960a9c83c2e68fd076c2af45f7becf57996637e38c58ce99518c9387a4",
+      "file": "data/raw/hlj/1-100-scale-mg-full-armor-gundam-ver-ka-gundam-thunderbolt-ver-banh630490-up-20260825T041051Z.html"
+    },
+    {
+      "requested_url": "https://www.hlj.com/1-100-scale-mg-gundam-liberty-astray-red-frame-banh844623",
+      "final_url": "https://www.hlj.com/1-100-scale-mg-gundam-liberty-astray-red-frame-banh844623",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 109307,
+      "sha256": "a48b52397a0fce8dde0efe86930084788b3d41fb94d576282a1a241ee26a2399",
+      "file": "data/raw/hlj/1-100-scale-mg-gundam-liberty-astray-red-frame-banh844623-20260825T041051Z.html"
+    },
+    {
+      "requested_url": "https://www.hlj.com/1-100-scale-mg-gundam-rx-78-2-ver-3-0-banh616104-up",
+      "final_url": "https://www.hlj.com/1-100-scale-mg-gundam-rx-78-2-ver-3-0-banh616104-up",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 112206,
+      "sha256": "15a14d87c24fdcaaa6dd4d967f4aeb8cdda44ab42ed8faf6bcd56d11e5cc2480",
+      "file": "data/raw/hlj/1-100-scale-mg-gundam-rx-78-2-ver-3-0-banh616104-up-20260825T041051Z.html"
+    },
+    {
+      "requested_url": "https://www.hlj.com/1-100-scale-mg-msn-00100-type-100-hyakushiki-ver-2-0-banh615923-up",
+      "final_url": "https://www.hlj.com/1-100-scale-mg-msn-00100-type-100-hyakushiki-ver-2-0-banh615923-up",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 114524,
+      "sha256": "5bbb59aeb19b739260ae5407e0f80f883196b05d40f32ca6698afb7e36e2aee7",
+      "file": "data/raw/hlj/1-100-scale-mg-msn-00100-type-100-hyakushiki-ver-2-0-banh615923-up-20260825T041051Z.html"
+    },
+    {
+      "requested_url": "https://www.hlj.com/1-100-scale-mg-zz-gundam-ver-ka-banh631510-up",
+      "final_url": "https://www.hlj.com/1-100-scale-mg-zz-gundam-ver-ka-banh631510-up",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 116593,
+      "sha256": "ceddcfb3bf0238a67f3ff975a15b913ff6d1fe38f6e5d1be311ab62732efb7c9",
+      "file": "data/raw/hlj/1-100-scale-mg-zz-gundam-ver-ka-banh631510-up-20260825T041051Z.html"
+    }
+  ],
+  "errors": [],
+  "delay_seconds": 5.0,
+  "finished_at": "2026-08-25T04:11:23.562325+00:00"
+}
