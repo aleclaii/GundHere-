@@ -85,6 +85,21 @@ and Gunpla-specific score for every candidate, sorts them by final score, and
 reports the best candidate, runner-up, and score margin. Use `--limit` to change
 the candidate-pool size.
 
+## Vector retrieval baseline
+
+`vector_search.py` builds an in-memory sparse TF-IDF index over canonical names,
+aliases, grades, and scales. It combines word features with character trigrams
+and ranks all 1,146 entities using cosine similarity:
+
+```bash
+python3 vector_search.py RG 1/144 RX-93 Nu Gundma
+python3 vector_search.py strike freedom titanium --json
+```
+
+This dependency-free baseline is intentionally brute-force. At the current
+corpus size it is simple and fast, and it gives us retrieval measurements before
+we persist vectors or adopt an approximate-nearest-neighbor dependency.
+
 The builder writes `data/index/gundhere.sqlite3` atomically. Its normalized
 schema contains:
 
