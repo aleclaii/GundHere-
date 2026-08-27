@@ -19,6 +19,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from fuzzy import gunpla_match_score
+
 
 SCHEMA_VERSION = "1"
 DEFAULT_GROUND_TRUTH = Path("data/processed/gunpla_ground_truth.csv")
@@ -480,12 +482,13 @@ def build_database(source_path: Path, output_path: Path) -> dict[str, int]:
         temporary_path.unlink(missing_ok=True)
 
 
-def _fts_query(user_query: str) -> str | None:
+def _fts_query(user_query: str, *, match_any: bool = False) -> str | None:
     tokens = QUERY_TOKEN_PATTERN.findall(user_query.casefold())
     if not tokens:
         return None
     # Quoted prefix terms avoid exposing SQLite FTS syntax to user input.
-    return " AND ".join(f'"{token}"*' for token in tokens)
+    operator = " OR " if match_any else " AND "
+    return operator.join(f'"{token}"*' for token in tokens)
 
 
 def _normalize_scale(scale: str | None) -> str | None:
@@ -507,6 +510,7 @@ def search_database(
     scale: str | None = None,
     availability: str | None = None,
     limit: int = 10,
+    match_any: bool = False,
 ) -> list[dict[str, Any]]:
     """Search entities and attach every indexed retailer listing."""
     if not 1 <= limit <= 100:
@@ -519,7 +523,7 @@ def search_database(
     grade = grade.strip().upper() if grade and grade.strip() else None
     scale = _normalize_scale(scale)
     availability = availability.strip() if availability and availability.strip() else None
-    fts_query = _fts_query(query)
+    fts_query = _fts_query(query, match_any=match_any)
 
     connection = sqlite3.connect(
         f"file:{database_path.resolve()}?mode=ro",
@@ -623,6 +627,84 @@ def search_database(
         connection.close()
 
 
+def fuzzy_search_database(
+    database_path: Path,
+    query: str,
+    *,
+    grade: str | None = None,
+    scale: str | None = None,
+    availability: str | None = None,
+    candidate_limit: int = 20,
+) -> dict[str, Any]:
+    """Retrieve FTS5 candidates, rerank them, and compare the top two."""
+    if not query.strip():
+        raise ValueError("query must not be empty for fuzzy search")
+    if not 2 <= candidate_limit <= 100:
+        raise ValueError("candidate_limit must be between 2 and 100")
+
+    # OR retrieval is deliberately broad: a misspelled word should not prevent
+    # correctly spelled grade, scale, model-code, or model-name terms from
+    # producing candidates. FTS5 remains candidate generation, not final rank.
+    fts_candidates = search_database(
+        database_path,
+        query,
+        grade=grade,
+        scale=scale,
+        availability=availability,
+        limit=candidate_limit,
+        match_any=True,
+    )
+
+    reranked = []
+    for candidate in fts_candidates:
+        match = gunpla_match_score(candidate["canonical_name"], query)
+        candidate = dict(candidate)
+        candidate["fts_rank"] = candidate.pop("rank")
+        candidate["final_score"] = match["final_score"]
+        candidate["lexical_score"] = match["lexical"]["total"]
+        candidate["score_components"] = match["lexical"]
+        candidate["domain_adjustment"] = match["domain_adjustment"]
+        candidate["rejected"] = match["rejected"]
+        candidate["match_reasons"] = match["reasons"]
+        candidate["query_features"] = match["listing_features"]
+        candidate["candidate_features"] = match["canonical_features"]
+        reranked.append(candidate)
+
+    reranked.sort(
+        key=lambda candidate: (
+            -candidate["final_score"],
+            candidate["fts_rank"],
+            candidate["canonical_name"],
+        )
+    )
+
+    best = reranked[0] if reranked else None
+    runner_up = reranked[1] if len(reranked) > 1 else None
+    margin = (
+        best["final_score"] - runner_up["final_score"]
+        if best is not None and runner_up is not None
+        else None
+    )
+
+    comparison = {
+        "best_entity_id": best["entity_id"] if best else None,
+        "best_name": best["canonical_name"] if best else None,
+        "best_score": best["final_score"] if best else None,
+        "runner_up_entity_id": runner_up["entity_id"] if runner_up else None,
+        "runner_up_name": runner_up["canonical_name"] if runner_up else None,
+        "runner_up_score": runner_up["final_score"] if runner_up else None,
+        "score_margin": margin,
+    }
+
+    return {
+        "query": query,
+        "candidate_limit": candidate_limit,
+        "candidate_count": len(reranked),
+        "comparison": comparison,
+        "candidates": reranked,
+    }
+
+
 def database_metadata(database_path: Path) -> dict[str, str]:
     connection = sqlite3.connect(
         f"file:{database_path.resolve()}?mode=ro",
@@ -632,4 +714,3 @@ def database_metadata(database_path: Path) -> dict[str, str]:
         return dict(connection.execute("SELECT key, value FROM metadata"))
     finally:
         connection.close()
-

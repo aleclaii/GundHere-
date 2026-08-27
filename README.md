@@ -80,6 +80,11 @@ python3 search.py gundam --grade RG --scale 144
 python3 search.py strike freedom --availability "IN STOCK" --json
 ```
 
+The CLI retrieves 20 broad FTS5 candidates by default, calculates the lexical
+and Gunpla-specific score for every candidate, sorts them by final score, and
+reports the best candidate, runner-up, and score margin. Use `--limit` to change
+the candidate-pool size.
+
 The builder writes `data/index/gundhere.sqlite3` atomically. Its normalized
 schema contains:
 
@@ -103,14 +108,14 @@ The tests verify expected row counts, SQLite integrity, exact-match listing
 attachment, variant separation, negative-product exclusion, filters, metadata,
 and punctuation handling.
 
-## Planned matching and semantic search
+## Fuzzy reranking and planned semantic search
 
-Fuzzy matching should be added as a candidate-generation and review stage, not
-inside the authoritative index builder. Candidate entities should first be
-blocked by grade/scale, scored by normalized name similarity, and penalized for
-conflicting variant tokens such as `clear color`, `titanium finish`, or
-`special coating`. Only high-precision decisions should be accepted
-automatically; ambiguous matches belong in a review queue.
+FTS5 performs broad candidate generation while the fuzzy layer reranks those
+candidates using edit, token, trigram, grade, scale, model-code, variant, and
+product-type evidence. The authoritative index builder remains separate and
+never changes a matching decision. Only high-precision decisions should be
+accepted automatically; small best-versus-runner-up margins belong in a review
+queue.
 
 Vector search can later add semantic candidates using one embedding per entity.
 Hybrid ranking should combine FTS5/BM25, fuzzy similarity, and vector distance,

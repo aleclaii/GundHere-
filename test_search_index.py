@@ -7,7 +7,12 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from search_index import build_database, database_metadata, search_database
+from search_index import (
+    build_database,
+    database_metadata,
+    fuzzy_search_database,
+    search_database,
+)
 
 
 GROUND_TRUTH = Path("data/processed/gunpla_ground_truth.csv")
@@ -67,6 +72,42 @@ class SearchIndexTests(unittest.TestCase):
         self.assertEqual(metadata["schema_version"], "1")
         self.assertEqual(int(metadata["count_entities"]), 1146)
         self.assertEqual(len(metadata["source_sha256"]), 64)
+
+    def test_fuzzy_search_reranks_twenty_fts_candidates(self) -> None:
+        report = fuzzy_search_database(
+            self.database,
+            "RG 1/144 RX-93 Nu Gndam",
+        )
+        candidates = report["candidates"]
+
+        self.assertEqual(report["candidate_limit"], 20)
+        self.assertEqual(report["candidate_count"], 20)
+        self.assertEqual(
+            [row["final_score"] for row in candidates],
+            sorted(
+                (row["final_score"] for row in candidates),
+                reverse=True,
+            ),
+        )
+        self.assertTrue(all("score_components" in row for row in candidates))
+
+    def test_fuzzy_search_compares_top_two_scores(self) -> None:
+        report = fuzzy_search_database(
+            self.database,
+            "RG 1/144 RX-93 Nu Gndam",
+        )
+        best, runner_up = report["candidates"][:2]
+        comparison = report["comparison"]
+
+        self.assertEqual(comparison["best_entity_id"], best["entity_id"])
+        self.assertEqual(
+            comparison["runner_up_entity_id"],
+            runner_up["entity_id"],
+        )
+        self.assertAlmostEqual(
+            comparison["score_margin"],
+            best["final_score"] - runner_up["final_score"],
+        )
 
 
 if __name__ == "__main__":
