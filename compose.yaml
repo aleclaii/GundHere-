@@ -1,0 +1,40 @@
+services:
+  search:
+    build: .
+    volumes:
+      - ./data:/app/data
+    command:
+      - python
+      - search.py
+      - gundam
+
+  index:
+    build: .
+    volumes:
+      - ./data:/app/data
+    command:
+      - python
+      - build_search_index.py
+
+  test:
+    build: .
+    command:
+      - python
+      - -m
+      - unittest
+      - -v
+      - test_fuzzy.py
+      - test_search_index.py
+      - test_vector_search.py
+
+  crawler:
+    build: .
+    profiles:
+      - crawler
+    volumes:
+      - ./data:/app/data
+    command:
+      - python
+      - fetch.py
+      - --max-products
+      - "5"

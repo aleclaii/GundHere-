@@ -1,0 +1,13 @@
+.git/
+.gitignore
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+
+data/raw/
+data/index/
+downloaded-page_*.html
+
+FUZZY_VECTOR_PLAN.txt
