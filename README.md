@@ -85,6 +85,29 @@ and Gunpla-specific score for every candidate, sorts them by final score, and
 reports the best candidate, runner-up, and score margin. Use `--limit` to change
 the candidate-pool size.
 
+Normal searches are hybrid by default: the engine unions FTS5 and TF-IDF vector
+candidates, deduplicates canonical entity IDs, and applies the explainable
+Gunpla scorer. Retrieval scores remain diagnostic signals rather than being
+added directly because BM25 and cosine use incompatible scales.
+
+## Browser client
+
+Build the index, start the local server, and open `http://127.0.0.1:8000`:
+
+```bash
+python3 build_search_index.py
+python3 server.py
+```
+
+The Python server caches the TF-IDF vectors at startup, exposes `/api/search`
+and `/api/health`, and serves the dependency-free HTML/CSS/JavaScript client.
+With Docker Compose:
+
+```bash
+docker compose run --rm index
+docker compose up web
+```
+
 ## Vector retrieval baseline
 
 `vector_search.py` builds an in-memory sparse TF-IDF index over canonical names,

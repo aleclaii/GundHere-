@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-30T00:00:00-05:00",
+  "title": "Design System: GundHere",
+  "extensions": {
+    "colorMeta": {
+      "work-surface": { "role": "neutral", "displayName": "Measured Work Surface", "canonical": "#e9edeb", "tonalRamp": ["oklch(15% 0.01 165)", "oklch(25% 0.01 165)", "oklch(38% 0.01 165)", "oklch(50% 0.01 165)", "oklch(63% 0.01 165)", "oklch(75% 0.01 165)", "oklch(86% 0.01 165)", "oklch(95% 0.01 165)"] },
+      "inspection-paper": { "role": "neutral", "displayName": "Inspection Paper", "canonical": "#f8faf8", "tonalRamp": ["oklch(15% 0.008 165)", "oklch(25% 0.008 165)", "oklch(38% 0.008 165)", "oklch(50% 0.008 165)", "oklch(63% 0.008 165)", "oklch(75% 0.008 165)", "oklch(86% 0.008 165)", "oklch(97% 0.008 165)"] },
+      "paper-deep": { "role": "neutral", "displayName": "Deep Paper", "canonical": "#dde4e0", "tonalRamp": ["oklch(15% 0.015 165)", "oklch(25% 0.015 165)", "oklch(38% 0.015 165)", "oklch(50% 0.015 165)", "oklch(63% 0.015 165)", "oklch(75% 0.015 165)", "oklch(86% 0.015 165)", "oklch(95% 0.015 165)"] },
+      "ink-green": { "role": "neutral", "displayName": "Ink Green", "canonical": "#10251f", "tonalRamp": ["oklch(15% 0.035 165)", "oklch(25% 0.035 165)", "oklch(38% 0.035 165)", "oklch(50% 0.035 165)", "oklch(63% 0.035 165)", "oklch(75% 0.035 165)", "oklch(86% 0.035 165)", "oklch(95% 0.035 165)"] },
+      "ink-soft": { "role": "neutral", "displayName": "Soft Ink", "canonical": "#445a52", "tonalRamp": ["oklch(15% 0.025 165)", "oklch(25% 0.025 165)", "oklch(38% 0.025 165)", "oklch(50% 0.025 165)", "oklch(63% 0.025 165)", "oklch(75% 0.025 165)", "oklch(86% 0.025 165)", "oklch(95% 0.025 165)"] },
+      "rule-line": { "role": "neutral", "displayName": "Rule Line", "canonical": "#9eaca6", "tonalRamp": ["oklch(15% 0.015 165)", "oklch(25% 0.015 165)", "oklch(38% 0.015 165)", "oklch(50% 0.015 165)", "oklch(63% 0.015 165)", "oklch(75% 0.015 165)", "oklch(86% 0.015 165)", "oklch(95% 0.015 165)"] },
+      "rule-line-dark": { "role": "neutral", "displayName": "Dark Rule Line", "canonical": "#536861", "tonalRamp": ["oklch(15% 0.022 165)", "oklch(25% 0.022 165)", "oklch(38% 0.022 165)", "oklch(50% 0.022 165)", "oklch(63% 0.022 165)", "oklch(75% 0.022 165)", "oklch(86% 0.022 165)", "oklch(95% 0.022 165)"] },
+      "safety-orange": { "role": "primary", "displayName": "Safety Orange", "canonical": "#e34b22", "tonalRamp": ["oklch(15% 0.17 40)", "oklch(25% 0.17 40)", "oklch(38% 0.17 40)", "oklch(50% 0.17 40)", "oklch(63% 0.17 40)", "oklch(75% 0.17 40)", "oklch(86% 0.17 40)", "oklch(95% 0.17 40)"] },
+      "safety-orange-dark": { "role": "primary", "displayName": "Deep Safety Orange", "canonical": "#a72d10", "tonalRamp": ["oklch(15% 0.15 38)", "oklch(25% 0.15 38)", "oklch(38% 0.15 38)", "oklch(50% 0.15 38)", "oklch(63% 0.15 38)", "oklch(75% 0.15 38)", "oklch(86% 0.15 38)", "oklch(95% 0.15 38)"] },
+      "signal-green": { "role": "secondary", "displayName": "Signal Green", "canonical": "#13724c", "tonalRamp": ["oklch(15% 0.11 155)", "oklch(25% 0.11 155)", "oklch(38% 0.11 155)", "oklch(50% 0.11 155)", "oklch(63% 0.11 155)", "oklch(75% 0.11 155)", "oklch(86% 0.11 155)", "oklch(95% 0.11 155)"] },
+      "caution-amber": { "role": "secondary", "displayName": "Caution Amber", "canonical": "#9b4b00", "tonalRamp": ["oklch(15% 0.13 65)", "oklch(25% 0.13 65)", "oklch(38% 0.13 65)", "oklch(50% 0.13 65)", "oklch(63% 0.13 65)", "oklch(75% 0.13 65)", "oklch(86% 0.13 65)", "oklch(95% 0.13 65)"] },
+      "selection-wash": { "role": "neutral", "displayName": "Selection Wash", "canonical": "#fff3ed", "tonalRamp": ["oklch(15% 0.025 45)", "oklch(25% 0.025 45)", "oklch(38% 0.025 45)", "oklch(50% 0.025 45)", "oklch(63% 0.025 45)", "oklch(75% 0.025 45)", "oklch(86% 0.025 45)", "oklch(96% 0.025 45)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Inventory Display", "purpose": "Primary proposition and large identity moments." },
+      "title": { "displayName": "Catalog Title", "purpose": "Section headings and canonical kit names." },
+      "body": { "displayName": "Operational Body", "purpose": "Guidance, filters, and evidence descriptions." },
+      "label": { "displayName": "Inspection Label", "purpose": "Uppercase controls, codes, and metadata headings." }
+    },
+    "shadows": [
+      { "name": "lifted-paper", "value": "0 12px 30px rgba(16, 37, 31, 0.12)", "purpose": "Lift the active search console and inspection sheet from the work surface." }
+    ],
+    "motion": [
+      { "name": "result-reveal", "value": "420ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Reveal newly shelved result rows from left to right." },
+      { "name": "row-stagger", "value": "24ms", "purpose": "Offset consecutive candidate reveals." },
+      { "name": "loading-pulse", "value": "850ms ease-in-out infinite alternate", "purpose": "Signal active catalog comparison without a spinner." }
+    ],
+    "breakpoints": [
+      { "name": "lookup-stack", "value": "1180px" },
+      { "name": "workspace-stack", "value": "900px" },
+      { "name": "compact", "value": "680px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Search Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The sole high-emphasis action that runs the kit search.",
+      "html": "<button class=\"ds-search-button\"><span>Search kits</span><svg aria-hidden=\"true\" viewBox=\"0 0 24 24\"><path d=\"m14.5 14.5 5 5m-2-10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z\" /></svg></button>",
+      "css": ".ds-search-button { display:inline-flex; min-width:150px; align-items:center; justify-content:center; gap:10px; padding:14px 20px; border:0; color:#fff; background:var(--accent,#e34b22); font:780 1rem system-ui,sans-serif; cursor:pointer; } .ds-search-button:hover { background:var(--accent-dark,#a72d10); } .ds-search-button:active { transform:translateY(1px); } .ds-search-button:focus-visible { outline:3px solid var(--accent,#e34b22); outline-offset:3px; } .ds-search-button svg { width:20px; fill:none; stroke:currentColor; stroke-linecap:round; stroke-width:2; }"
+    },
+    {
+      "name": "Outline Example Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "A low-emphasis action used to load a sample query.",
+      "html": "<button class=\"ds-example-button\">Load an example</button>",
+      "css": ".ds-example-button { padding:9px 12px; border:1px solid var(--ink,#10251f); color:var(--ink,#10251f); background:transparent; font:720 1rem system-ui,sans-serif; cursor:pointer; } .ds-example-button:hover { background:var(--paper,#f8faf8); } .ds-example-button:active { transform:translateY(1px); } .ds-example-button:focus-visible { outline:3px solid var(--accent,#e34b22); outline-offset:3px; }"
+    },
+    {
+      "name": "Kit Query Field",
+      "kind": "input",
+      "refersTo": "query-input",
+      "description": "The dominant input for remembered kit names and fragments.",
+      "html": "<label class=\"ds-query-field\"><span>Kit name or remembered terms</span><input value=\"RG 1/144 Nu Gundma\" aria-label=\"Kit name or remembered terms\"></label>",
+      "css": ".ds-query-field { display:block; padding:18px 20px 16px; background:var(--paper,#f8faf8); } .ds-query-field span { display:block; margin-bottom:7px; color:var(--ink-soft,#445a52); font:760 .72rem system-ui,sans-serif; letter-spacing:.06em; text-transform:uppercase; } .ds-query-field input { width:100%; padding:0; border:0; color:var(--ink,#10251f); background:transparent; font:700 2rem/1.1 \"Barlow Condensed\",\"Arial Narrow\",sans-serif; letter-spacing:-.02em; } .ds-query-field input:focus-visible { outline:3px solid var(--accent,#e34b22); outline-offset:3px; }"
+    },
+    {
+      "name": "Filter Select",
+      "kind": "input",
+      "description": "A compact paper-cell selector for grade, scale, and availability.",
+      "html": "<label class=\"ds-filter-field\"><span>Grade</span><select><option>Any grade</option><option>HG</option><option>RG</option></select></label>",
+      "css": ".ds-filter-field { display:block; padding:12px 14px; background:var(--paper,#f8faf8); } .ds-filter-field span { display:block; margin-bottom:7px; color:var(--ink-soft,#445a52); font:760 .72rem system-ui,sans-serif; letter-spacing:.06em; text-transform:uppercase; } .ds-filter-field select { width:100%; border:0; color:var(--ink,#10251f); background:transparent; font:650 1rem system-ui,sans-serif; } .ds-filter-field select:focus-visible { outline:3px solid var(--accent,#e34b22); outline-offset:3px; }"
+    },
+    {
+      "name": "Selected Candidate Row",
+      "kind": "custom",
+      "refersTo": "result-row-selected",
+      "description": "A ranked canonical candidate with the active inspection mark.",
+      "html": "<button class=\"ds-result-row\" aria-pressed=\"true\"><span class=\"ds-rank\">01</span><span><strong>RG 1/144 Nu Gundam</strong><small>RG · 1/144 · Canonical</small></span><span class=\"ds-path\">Retrieved by<br><strong>FTS5 + vector</strong></span><span class=\"ds-score\"><strong>0.942</strong><small>score</small></span></button>",
+      "css": ".ds-result-row { display:grid; grid-template-columns:42px minmax(0,1fr) minmax(116px,.35fr) 74px; width:100%; gap:15px; align-items:center; padding:15px 10px 15px 4px; border:0; border-bottom:1px solid var(--line,#9eaca6); color:var(--ink,#10251f); background:var(--selection-wash,#fff3ed); box-shadow:inset 0 0 0 2px var(--accent,#e34b22); text-align:left; cursor:pointer; } .ds-result-row:hover { background:var(--paper,#f8faf8); } .ds-result-row:focus-visible { outline:3px solid var(--accent,#e34b22); outline-offset:3px; } .ds-result-row strong { display:block; font:750 .98rem/1.25 \"Barlow Condensed\",\"Arial Narrow\",sans-serif; } .ds-result-row small { display:block; margin-top:5px; color:var(--ink-soft,#445a52); font:.74rem system-ui,sans-serif; } .ds-rank { color:var(--ink-soft,#445a52); font:760 1rem system-ui,sans-serif; text-align:center; } .ds-path { color:var(--ink-soft,#445a52); font:.72rem/1.35 system-ui,sans-serif; } .ds-score { text-align:right; font-variant-numeric:tabular-nums; } .ds-score strong { font:760 1.15rem system-ui,sans-serif; } .ds-score small { margin:0; text-transform:uppercase; }"
+    },
+    {
+      "name": "Identity Chip",
+      "kind": "chip",
+      "refersTo": "identity-chip",
+      "description": "A non-interactive label for grade, scale, or relationship metadata.",
+      "html": "<span class=\"ds-identity-chip\">1/144</span>",
+      "css": ".ds-identity-chip { display:inline-block; padding:5px 8px; border:1px solid var(--line-dark,#536861); border-radius:999px; color:var(--ink,#10251f); background:transparent; font:700 .72rem system-ui,sans-serif; }"
+    },
+    {
+      "name": "Inspection Sheet",
+      "kind": "card",
+      "refersTo": "inspector-sheet",
+      "description": "The lifted evidence surface for a selected canonical candidate.",
+      "html": "<article class=\"ds-inspector\"><p class=\"ds-code\">GUNPLA-0042</p><div class=\"ds-inspector-head\"><div><h2>RG 1/144 Nu Gundam</h2><p>Canonical candidate</p></div><strong class=\"ds-stamp\">0.942</strong></div><div class=\"ds-tags\"><span>RG</span><span>1/144</span><span>CANONICAL</span></div></article>",
+      "css": ".ds-inspector { padding:22px; border-top:5px solid var(--ink,#10251f); color:var(--ink,#10251f); background:var(--paper,#f8faf8); box-shadow:0 12px 30px rgba(16,37,31,.12); font-family:system-ui,sans-serif; } .ds-code { margin:0 0 5px; color:var(--ink-soft,#445a52); font-size:.68rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; } .ds-inspector-head { display:grid; grid-template-columns:1fr auto; gap:16px; } .ds-inspector h2 { margin:0 0 5px; font:600 1.22rem \"Barlow Condensed\",\"Arial Narrow\",sans-serif; } .ds-inspector p { color:var(--ink-soft,#445a52); } .ds-stamp { display:grid; width:72px; height:72px; place-content:center; border:2px solid var(--ink,#10251f); border-radius:50%; font-size:1.15rem; font-variant-numeric:tabular-nums; transform:rotate(3deg); } .ds-tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:13px; } .ds-tags span { padding:5px 8px; border:1px solid var(--line-dark,#536861); border-radius:999px; font-size:.72rem; font-weight:700; }"
+    },
+    {
+      "name": "Status Masthead",
+      "kind": "nav",
+      "description": "The compact brand rail with the live index status.",
+      "html": "<nav class=\"ds-masthead\"><a href=\"#\"><span class=\"ds-mark\"></span><span>GUNDHERE</span></a><p>Canonical Gunpla kit finder</p><span class=\"ds-status\"><i></i>1,146 entities ready</span></nav>",
+      "css": ".ds-masthead { display:grid; grid-template-columns:auto 1fr auto; align-items:center; min-height:58px; padding:0 4vw; color:#fff; background:var(--ink,#10251f); font-family:system-ui,sans-serif; } .ds-masthead a { display:inline-flex; align-items:center; gap:10px; color:inherit; font:850 1.04rem \"Barlow Condensed\",\"Arial Narrow\",sans-serif; letter-spacing:.1em; text-decoration:none; } .ds-masthead a:hover { color:#fff3ed; } .ds-masthead a:focus-visible { outline:3px solid var(--accent,#e34b22); outline-offset:3px; } .ds-mark { width:18px; height:18px; background:var(--accent,#e34b22); clip-path:polygon(0 0,100% 0,100% 65%,65% 65%,65% 100%,0 100%); } .ds-masthead p { margin-left:24px; color:#c8d5cf; font-size:.82rem; } .ds-status { display:flex; align-items:center; gap:8px; color:#dce6e2; font-size:.78rem; } .ds-status i { width:8px; height:8px; background:#39c889; border-radius:50%; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Hobby-Shop Inspection Bench",
+    "overview": "GundHere should feel like a precise work surface where a hobbyist compares box labels, catalog identities, and evidence—not like a generic analytics dashboard. Cool gray-green surfaces form the bench; dense ruled rows form the candidate rack; a warm paper sheet holds the selected kit's evidence. Ink green supplies authority, while safety orange behaves like a physical selection mark.\n\nThe system is compact, factual, and tactile. It favors one continuous scan path from lookup to ranked candidates to inspection detail. Expressiveness comes from condensed inventory typography, square marks, fine rules, tabular scores, and restrained industrial color rather than decoration.",
+    "keyCharacteristics": [
+      "Cool measured work surfaces with a subtle 24px bench grid.",
+      "Condensed inventory-label typography paired with highly legible system text.",
+      "Safety orange reserved for action, focus, rejection, and active selection.",
+      "Ruled rows and paper sheets that keep ranking evidence visually inspectable.",
+      "Compact desktop density that collapses deliberately for narrow screens."
+    ],
+    "rules": [
+      { "name": "The Safety-Mark Rule", "body": "Orange must identify an action, focus target, active choice, or rejection; it is never a decorative fill.", "section": "colors" },
+      { "name": "The Ink-on-Paper Rule", "body": "Long-form and diagnostic text stays ink green on paper or the measured work surface; do not introduce pure black panels into the workspace.", "section": "colors" },
+      { "name": "The Two-Voice Rule", "body": "Use the condensed face for identity and hierarchy; use the system face for operation and evidence. Do not add a third typographic voice.", "section": "typography" },
+      { "name": "The One Scan Path Rule", "body": "Place query, retrieval summary, ranked candidates, and selected evidence in reading order; never make users jump between disconnected dashboards.", "section": "layout" },
+      { "name": "The Paper-Lift Rule", "body": "Elevation marks active work surfaces, not every container. Lists, summaries, and metadata remain ruled and flat.", "section": "elevation" },
+      { "name": "The Functional Curve Rule", "body": "Curves communicate status, compact tags, or stamped scoring; they do not soften the main workbench structure.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do keep the interface anchored in the cool measured work surface, inspection paper, and green-black ink palette.",
+      "Do reserve safety orange for action, focus, selection, and rejection.",
+      "Do use tabular numerals and aligned columns wherever ranking evidence is compared.",
+      "Do preserve the 3px visible focus outline and reduced-motion behavior.",
+      "Do collapse secondary detail before shrinking primary labels beyond legibility."
+    ],
+    "donts": [
+      "Don't turn the product into a rounded-card dashboard or distribute shadows across every region.",
+      "Don't use orange as ambient decoration or a large page background.",
+      "Don't add speculative badges, thresholds, prices, availability, or confidence claims.",
+      "Don't replace ruled rows with isolated tiles; the rack metaphor depends on continuous comparison.",
+      "Don't add ornamental typefaces, gradients, or glossy effects that break the inspection-bench character."
+    ]
+  }
+}

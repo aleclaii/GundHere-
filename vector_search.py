@@ -162,7 +162,13 @@ class TfidfVectorIndex:
     def encode_query(self, query: str) -> SparseVector:
         return self._encode_counts(feature_counts(query))
 
-    def search(self, query: str, *, limit: int = 20) -> list[dict[str, object]]:
+    def search(
+        self,
+        query: str,
+        *,
+        limit: int = 20,
+        allowed_entity_ids: set[str] | None = None,
+    ) -> list[dict[str, object]]:
         if not query.strip():
             raise ValueError("query must not be empty")
         if not 1 <= limit <= 100:
@@ -174,6 +180,12 @@ class TfidfVectorIndex:
 
         scored = []
         for document, document_vector in zip(self.documents, self.vectors):
+            if (
+                allowed_entity_ids is not None
+                and document.entity_id not in allowed_entity_ids
+            ):
+                continue
+
             # Both vectors have L2 norm 1, so their dot product is cosine
             # similarity; iterating query features keeps the scan inexpensive.
             cosine = sum(

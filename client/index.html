@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Search canonical Gunpla kits with hybrid retrieval.">
+    <title>GundHere — Gunpla kit search</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <!--
+      THESIS: A Gunpla search is an inspection bench, not a generic dashboard; names, evidence, and distinctions stay in one scan path.
+      OWN-WORLD: Cool work-surface gray, ink green, safety orange, ruled inventory labels, compact controls, and square inspection marks.
+      STORY: Enter imperfect kit terms, see the two-retriever merge, inspect confidence and conflicts, then open a real retailer listing.
+      FIRST VIEWPORT: Brand/status rail above a full-width lookup console; ranked labels occupy the left field and a sticky evidence sheet occupies the right.
+      FORM: Hobby-shop inspection bench, grounded direction seven, seed 7606e2cf.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+    -->
+    <a class="skip-link" href="#results">Skip to search results</a>
+
+    <header class="masthead">
+      <a class="wordmark" href="/" aria-label="GundHere home">
+        <span class="wordmark-mark" aria-hidden="true"></span>
+        <span>GUNDHERE</span>
+      </a>
+      <p class="masthead-purpose">Canonical Gunpla kit finder</p>
+      <div class="index-status" id="index-status" role="status">
+        <span class="status-light" aria-hidden="true"></span>
+        Connecting to index
+      </div>
+    </header>
+
+    <main>
+      <section class="lookup" aria-labelledby="lookup-heading">
+        <div class="lookup-copy">
+          <h1 id="lookup-heading">Find the kit, even when the name is fuzzy.</h1>
+          <p>Search across canonical catalogs and reviewed retailer listings. Grades, scales, variants, and accessories stay distinct.</p>
+        </div>
+
+        <form id="search-form" class="search-console" role="search">
+          <label class="query-field" for="query">
+            <span>Kit name or remembered terms</span>
+            <input
+              id="query"
+              name="q"
+              type="search"
+              placeholder="Try: RG 1/144 Nu Gundma"
+              autocomplete="off"
+              required
+            >
+          </label>
+
+          <div class="filter-field">
+            <label for="grade">Grade</label>
+            <select id="grade" name="grade">
+              <option value="">Any grade</option>
+              <option>HG</option>
+              <option>RG</option>
+              <option>MG</option>
+              <option>PG</option>
+              <option>SD</option>
+            </select>
+          </div>
+
+          <div class="filter-field">
+            <label for="scale">Scale</label>
+            <select id="scale" name="scale">
+              <option value="">Any scale</option>
+              <option value="1/144">1/144</option>
+              <option value="1/100">1/100</option>
+              <option value="1/60">1/60</option>
+              <option value="Non-scale">Non-scale</option>
+            </select>
+          </div>
+
+          <div class="filter-field">
+            <label for="availability">Availability</label>
+            <select id="availability" name="availability">
+              <option value="">Any status</option>
+              <option value="IN STOCK">In stock</option>
+              <option value="OUT OF STOCK">Out of stock</option>
+            </select>
+          </div>
+
+          <button class="search-button" id="search-button" type="submit">
+            <span>Search kits</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="m14.5 14.5 5 5m-2-10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" />
+            </svg>
+          </button>
+        </form>
+      </section>
+
+      <section id="search-summary" class="search-summary" hidden aria-live="polite"></section>
+
+      <div class="workspace">
+        <section class="result-field" aria-labelledby="results-heading">
+          <div class="section-heading">
+            <div>
+              <h2 id="results-heading">Candidate rack</h2>
+              <p id="result-count">Run a search to load canonical candidates.</p>
+            </div>
+            <span class="sort-label">Sorted by final score</span>
+          </div>
+
+          <div id="results" class="results" aria-live="polite">
+            <div class="empty-state">
+              <svg aria-hidden="true" viewBox="0 0 80 80">
+                <path d="M15 17h50v46H15zM22 25h36M22 34h22M22 49h12M40 49h18" />
+              </svg>
+              <h3>The rack is ready.</h3>
+              <p>Enter the name you remember. Misspellings and incomplete titles are welcome.</p>
+              <button class="example-query" type="button" data-query="RG 1/144 Nu Gundma">Load an example</button>
+            </div>
+          </div>
+        </section>
+
+        <aside class="inspector" id="inspector" aria-labelledby="inspector-heading">
+          <div class="inspector-empty">
+            <p class="inspector-code">INSPECTION SHEET</p>
+            <h2 id="inspector-heading">Select a candidate</h2>
+            <p>Its identity, score components, retrieval paths, and retailer listings will appear here.</p>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      <p>Local index · Results reflect the latest reviewed data in your SQLite build.</p>
+    </footer>
+  </body>
+</html>

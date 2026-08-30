@@ -7,7 +7,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-from search_index import DEFAULT_DATABASE, fuzzy_search_database
+from hybrid_search import hybrid_search_database
+from search_index import DEFAULT_DATABASE
 
 
 def bounded_limit(value: str) -> int:
@@ -28,8 +29,10 @@ def parse_args() -> argparse.Namespace:
         "--limit",
         type=bounded_limit,
         default=20,
-        help="Number of FTS5 candidates to retrieve and fuzzy-rank (default: 20).",
+        help="Maximum number of hybrid results to display (default: 20).",
     )
+    parser.add_argument("--fts-limit", type=bounded_limit, default=20)
+    parser.add_argument("--vector-limit", type=bounded_limit, default=20)
     parser.add_argument("--json", action="store_true", help="Emit machine-readable JSON.")
     return parser.parse_args()
 
@@ -45,7 +48,12 @@ def print_human(report: dict[str, Any]) -> None:
         return
 
     comparison = report["comparison"]
-    print(f"FTS5 candidates: {report['candidate_count']}")
+    retrieval = report["retrieval"]
+    print(
+        "Candidates: "
+        f"{retrieval['fts_count']} FTS5 + {retrieval['vector_count']} vector "
+        f"= {retrieval['union_count']} unique"
+    )
     print(
         "Best: "
         f"{comparison['best_name']} ({comparison['best_score']:.3f})"
@@ -70,8 +78,20 @@ def print_human(report: dict[str, Any]) -> None:
             f"   final: {result['final_score']:.3f}; "
             f"lexical: {result['lexical_score']:.3f}; "
             f"domain: {result['domain_adjustment']:+.3f}; "
-            f"FTS5/BM25: {result['fts_rank']:.3f}"
+            f"via: {' + '.join(result['retrieved_by'])}"
         )
+        retrieval_details = []
+        if result["fts_rank_position"] is not None:
+            retrieval_details.append(
+                f"FTS #{result['fts_rank_position']} / "
+                f"BM25 {result['fts_bm25']:.3f}"
+            )
+        if result["vector_rank_position"] is not None:
+            retrieval_details.append(
+                f"vector #{result['vector_rank_position']} / "
+                f"cosine {result['vector_score']:.3f}"
+            )
+        print(f"   retrieval: {'; '.join(retrieval_details)}")
         if result["match_reasons"]:
             print(f"   reasons: {'; '.join(result['match_reasons'])}")
         if result["rejected"]:
@@ -92,13 +112,15 @@ def print_human(report: dict[str, Any]) -> None:
 
 def main() -> None:
     args = parse_args()
-    report = fuzzy_search_database(
+    report = hybrid_search_database(
         args.database,
         " ".join(args.query),
         grade=args.grade,
         scale=args.scale,
         availability=args.availability,
-        candidate_limit=args.limit,
+        fts_limit=args.fts_limit,
+        vector_limit=args.vector_limit,
+        result_limit=args.limit,
     )
     if args.json:
         print(json.dumps(report, indent=2, ensure_ascii=False))

@@ -26,6 +26,22 @@ services:
       - test_fuzzy.py
       - test_search_index.py
       - test_vector_search.py
+      - test_hybrid_search.py
+      - test_server.py
+
+  web:
+    build: .
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "8000:8000"
+    command:
+      - python
+      - server.py
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
 
   crawler:
     build: .
