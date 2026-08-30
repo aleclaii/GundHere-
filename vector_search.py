@@ -76,6 +76,7 @@ def load_vector_documents(database_path: Path) -> list[VectorDocument]:
         uri=True,
     )
     connection.row_factory = sqlite3.Row
+    connection.execute("PRAGMA query_only = ON")
     try:
         aliases_by_entity: dict[str, list[str]] = defaultdict(list)
         for row in connection.execute(

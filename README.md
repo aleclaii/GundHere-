@@ -99,14 +99,53 @@ python3 build_search_index.py
 python3 server.py
 ```
 
-The Python server caches the TF-IDF vectors at startup, exposes `/api/search`
-and `/api/health`, and serves the dependency-free HTML/CSS/JavaScript client.
-With Docker Compose:
+The FastAPI application caches the TF-IDF vectors at startup, exposes
+`/api/search` and `/api/health`, and serves the dependency-free
+HTML/CSS/JavaScript client through Uvicorn. With Docker Compose:
 
 ```bash
 docker compose run --rm index
 docker compose up web
 ```
+
+The production image builds an immutable SQLite index, runs as an unprivileged
+user, and contains only the search runtime and client. Crawling and parsing stay
+in the separate development image and are never invoked by a public request.
+
+## Production security
+
+The API enforces strict grade, scale, availability, result-count, query-length,
+and request-target limits. A per-client token bucket limits search bursts, while
+a semaphore and timeout bound concurrent search work. JSON request logs include
+a generated request ID, route, status, and duration without recording the search
+query. Unexpected exceptions are logged server-side and return a generic error.
+
+SQLite connections use read-only mode plus `PRAGMA query_only`. The browser
+response includes a restrictive Content Security Policy, clickjacking, MIME,
+referrer, permissions, opener, and production HSTS headers. FastAPI's interactive
+documentation is disabled on the public application.
+
+Important environment variables:
+
+- `RATE_LIMIT_CAPACITY` (default `20`)
+- `RATE_LIMIT_REFILL_PER_SECOND` (default `0.5`)
+- `MAXIMUM_CONCURRENT_SEARCHES` (default `8`)
+- `SEARCH_TIMEOUT_SECONDS` (default `5`)
+- `MAXIMUM_REQUEST_TARGET_BYTES` (default `2048`)
+- `ALLOWED_HOSTS` (comma-separated custom domains)
+- `TRUST_PROXY_HEADERS` (set only behind a trusted hosting proxy)
+
+## Deploy to Render
+
+The checked-in `render.yaml` defines a free Docker web service, an HTTP health
+check, and the production limits. After pushing the repository, choose
+**New → Blueprint** in Render, connect the repository, and deploy the Blueprint.
+Render supplies `PORT` and `RENDER_EXTERNAL_HOSTNAME`; the application uses both.
+Add every custom domain to `ALLOWED_HOSTS` before directing traffic to it.
+
+Raw retailer responses under `data/raw/` remain local and are ignored by Git.
+The reviewed ground-truth CSV is the only catalog input copied into the public
+container.
 
 ## Vector retrieval baseline
 
@@ -139,12 +178,13 @@ operators in a query cannot alter the SQL search expression.
 ## Tests
 
 ```bash
-python3 -m unittest -v test_search_index.py
+python3 -m unittest -v
 ```
 
 The tests verify expected row counts, SQLite integrity, exact-match listing
 attachment, variant separation, negative-product exclusion, filters, metadata,
-and punctuation handling.
+punctuation handling, API validation, rate limiting, security headers, generic
+error responses, and structured logging.
 
 ## Fuzzy reranking and planned semantic search
 

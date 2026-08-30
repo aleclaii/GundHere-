@@ -530,6 +530,7 @@ def search_database(
         uri=True,
     )
     connection.row_factory = sqlite3.Row
+    connection.execute("PRAGMA query_only = ON")
     try:
         filters = """
             (? IS NULL OR e.grade = ?)
@@ -711,6 +712,7 @@ def database_metadata(database_path: Path) -> dict[str, str]:
         uri=True,
     )
     try:
+        connection.execute("PRAGMA query_only = ON")
         return dict(connection.execute("SELECT key, value FROM metadata"))
     finally:
         connection.close()

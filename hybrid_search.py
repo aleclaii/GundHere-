@@ -44,6 +44,7 @@ def _eligible_entity_ids(
         uri=True,
     )
     try:
+        connection.execute("PRAGMA query_only = ON")
         rows = connection.execute(
             """
             SELECT e.entity_id
@@ -80,6 +81,7 @@ def _load_entities(
         uri=True,
     )
     connection.row_factory = sqlite3.Row
+    connection.execute("PRAGMA query_only = ON")
     try:
         entities = {
             row["entity_id"]: dict(row)

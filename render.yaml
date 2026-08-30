@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: gundhere
+    runtime: docker
+    plan: free
+    region: ohio
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    maxShutdownDelaySeconds: 15
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: TRUST_PROXY_HEADERS
+        value: "true"
+      - key: RATE_LIMIT_CAPACITY
+        value: "20"
+      - key: RATE_LIMIT_REFILL_PER_SECOND
+        value: "0.5"
+      - key: MAXIMUM_CONCURRENT_SEARCHES
+        value: "8"
+      - key: SEARCH_TIMEOUT_SECONDS
+        value: "5"
+      - key: MAXIMUM_REQUEST_TARGET_BYTES
+        value: "2048"
+      - key: LOG_LEVEL
+        value: INFO

@@ -18,5 +18,9 @@ venv/
 data/index/*.sqlite3
 data/index/*.sqlite3-*
 
+# Downloaded retailer pages stay local and never enter deployments
+data/raw/
+downloaded-page_*.html
+
 # Temporary planning notes
 FUZZY_VECTOR_PLAN.txt

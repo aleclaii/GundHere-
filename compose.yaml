@@ -1,6 +1,8 @@
 services:
   search:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     volumes:
       - ./data:/app/data
     command:
@@ -9,7 +11,9 @@ services:
       - gundam
 
   index:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     volumes:
       - ./data:/app/data
     command:
@@ -17,7 +21,9 @@ services:
       - build_search_index.py
 
   test:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     command:
       - python
       - -m
@@ -31,20 +37,13 @@ services:
 
   web:
     build: .
-    volumes:
-      - ./data:/app/data
     ports:
       - "8000:8000"
-    command:
-      - python
-      - server.py
-      - --host
-      - 0.0.0.0
-      - --port
-      - "8000"
 
   crawler:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     profiles:
       - crawler
     volumes:
