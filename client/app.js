@@ -64,9 +64,18 @@ function renderError(message) {
   summaryElement.hidden = true;
 }
 
-function renderSummary(report) {
+function formatDuration(milliseconds) {
+  if (!Number.isFinite(milliseconds)) return "—";
+  if (milliseconds < 1000) {
+    return `${milliseconds < 100 ? milliseconds.toFixed(1) : Math.round(milliseconds)} ms`;
+  }
+  return `${(milliseconds / 1000).toFixed(2)} s`;
+}
+
+function renderSummary(report, totalMs) {
   const comparison = report.comparison;
   const retrieval = report.retrieval;
+  const engineMs = report.timing?.engine_ms;
   const margin = comparison.score_margin;
   summaryElement.hidden = false;
   summaryElement.innerHTML = `
@@ -81,6 +90,7 @@ function renderSummary(report) {
     </div>
     <div class="summary-counts">
       ${retrieval.fts_count} FTS5 + ${retrieval.vector_count} vector → ${retrieval.union_count} unique candidates
+      <span class="summary-timing">Engine ${formatDuration(engineMs)} · total ${formatDuration(totalMs)}</span>
     </div>`;
 }
 
@@ -227,13 +237,15 @@ async function runSearch() {
   window.history.replaceState({}, "", `/?${parameters.toString()}`);
 
   try {
+    const startedAt = performance.now();
     const response = await fetch(`/api/search?${parameters}`, {
       signal: activeRequest.signal,
       headers: { Accept: "application/json" },
     });
     const report = await response.json();
+    const totalMs = performance.now() - startedAt;
     if (!response.ok) throw new Error(report.error || "The search service returned an error.");
-    renderSummary(report);
+    renderSummary(report, totalMs);
     renderResults(report);
   } catch (error) {
     if (error.name !== "AbortError") renderError(error.message);

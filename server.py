@@ -230,6 +230,15 @@ def _database_is_ready(database_path: Path) -> bool:
         return False
 
 
+def _timed_hybrid_search(*args, **kwargs):
+    started_at = time.perf_counter()
+    report = hybrid_search_database(*args, **kwargs)
+    report["timing"] = {
+        "engine_ms": round((time.perf_counter() - started_at) * 1000, 2)
+    }
+    return report
+
+
 def create_app(
     database_path: Path = DEFAULT_DATABASE,
     *,
@@ -383,7 +392,7 @@ def create_app(
         try:
             return await asyncio.wait_for(
                 run_in_threadpool(
-                    hybrid_search_database,
+                    _timed_hybrid_search,
                     database_path,
                     query,
                     grade=grade,
