@@ -13,6 +13,8 @@ htmlcov/
 venv/
 .env
 .env.*
+!.env.example
+node_modules/
 
 # Generated search indexes
 data/index/*.sqlite3
@@ -21,6 +23,11 @@ data/index/*.sqlite3-*
 # Downloaded retailer pages stay local and never enter deployments
 data/raw/
 downloaded-page_*.html
+
+# Local captures and exploratory artifacts; do not publish retailer page dumps
+/test.html
+/candidate-links.csv
+/Shelve/
 
 # Temporary planning notes
 FUZZY_VECTOR_PLAN.txt
