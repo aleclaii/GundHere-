@@ -1,4 +1,0 @@
-add 
-".env
-data/raw/"
-to .gitignore if later use .env
